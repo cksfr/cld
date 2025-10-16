@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Cat</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin: 50px; }
+    img { max-width: 400px; margin-top: 20px; border-radius: 10px; }
+    button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <h1>Random Cat Generator 🐱</h1>
+  <button onclick="getCat()">Show me a cat!</button>
+  <div id="catContainer"></div>
+
+  <script>
+    function getCat() {
+      fetch('https://api.thecatapi.com/v1/images/search')
+        .then(response => response.json())
+        .then(data => {
+          const catUrl = data[0].url;
+          document.getElementById('catContainer').innerHTML = `<img src="${catUrl}" alt="Random Cat">`;
+        })
+        .catch(err => console.error(err));
+    }
+  </script>
+
+</body>
+</html>
